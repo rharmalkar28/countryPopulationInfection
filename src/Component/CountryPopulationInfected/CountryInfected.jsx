@@ -58,19 +58,25 @@ const CountryInfected = observer(({ dataStore }) => {
                 {dataStore.masterDataObj[row].TotalDeaths || "-"}
               </TableCell>
               <TableCell align="right">
-                {(dataStore.masterDataObj[row].TotalConfirmed /
-                  dataStore.masterDataObj[row].population) *
-                  100}
+                {dataStore.masterDataObj[row].TotalConfirmed
+                  ? (dataStore.masterDataObj[row].TotalConfirmed /
+                      dataStore.masterDataObj[row].population) *
+                    100
+                  : "-"}
               </TableCell>
               <TableCell align="right">
-                {(dataStore.masterDataObj[row].TotalRecovered /
-                  dataStore.masterDataObj[row].population) *
-                  100}
+                {dataStore.masterDataObj[row].TotalRecovered
+                  ? (dataStore.masterDataObj[row].TotalRecovered /
+                      dataStore.masterDataObj[row].population) *
+                    100
+                  : "-"}
               </TableCell>
               <TableCell align="right">
-                {(dataStore.masterDataObj[row].TotalDeaths /
-                  dataStore.masterDataObj[row].population) *
-                  100}
+                {dataStore.masterDataObj[row].TotalDeaths
+                  ? (dataStore.masterDataObj[row].TotalDeaths /
+                      dataStore.masterDataObj[row].population) *
+                    100
+                  : "-"}
               </TableCell>
             </TableRow>
           ))}
