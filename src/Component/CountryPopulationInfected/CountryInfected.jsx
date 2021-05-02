@@ -25,8 +25,8 @@ const CountryInfected = observer(({ dataStore }) => {
     apiCall();
   }, []);
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="table">
+    <TableContainer component={Paper} style={{ maxHeight: "500px" }}>
+      <Table stickyHeader aria-label="table">
         <TableHead>
           <TableRow>
             <TableCell>Country (Capital)</TableCell>
@@ -59,23 +59,29 @@ const CountryInfected = observer(({ dataStore }) => {
               </TableCell>
               <TableCell align="right">
                 {dataStore.masterDataObj[row].TotalConfirmed
-                  ? (dataStore.masterDataObj[row].TotalConfirmed /
-                      dataStore.masterDataObj[row].population) *
-                    100
+                  ? (
+                      (dataStore.masterDataObj[row].TotalConfirmed /
+                        dataStore.masterDataObj[row].population) *
+                      100
+                    ).toFixed(4) + " %"
                   : "-"}
               </TableCell>
               <TableCell align="right">
                 {dataStore.masterDataObj[row].TotalRecovered
-                  ? (dataStore.masterDataObj[row].TotalRecovered /
-                      dataStore.masterDataObj[row].population) *
-                    100
+                  ? (
+                      (dataStore.masterDataObj[row].TotalRecovered /
+                        dataStore.masterDataObj[row].population) *
+                      100
+                    ).toFixed(4) + " %"
                   : "-"}
               </TableCell>
               <TableCell align="right">
                 {dataStore.masterDataObj[row].TotalDeaths
-                  ? (dataStore.masterDataObj[row].TotalDeaths /
-                      dataStore.masterDataObj[row].population) *
-                    100
+                  ? (
+                      (dataStore.masterDataObj[row].TotalDeaths /
+                        dataStore.masterDataObj[row].population) *
+                      100
+                    ).toFixed(4) + " %"
                   : "-"}
               </TableCell>
             </TableRow>
