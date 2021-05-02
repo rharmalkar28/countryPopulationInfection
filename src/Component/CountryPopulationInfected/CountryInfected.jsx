@@ -43,7 +43,7 @@ const CountryInfected = observer(({ dataStore }) => {
           {dataStore.masterDataCountryOrder.map((row) => (
             <TableRow key={row}>
               <TableCell component="th" scope="row">
-                {dataStore.masterDataObj[row].Country}
+                {`${dataStore.masterDataObj[row].Country} (${dataStore.masterDataObj[row].Capital})`}
               </TableCell>
               <TableCell align="right">
                 {dataStore.masterDataObj[row].population}
