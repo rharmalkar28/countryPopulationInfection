@@ -51,7 +51,10 @@ class DataStore {
   }
 
   generateIndiaInfectionData(data) {
-    const indianStateOrderTemp = Object.keys(data);
+    const indianStateOrderTemp = Object.keys(data).filter(
+      (key) => key !== "TT"
+    );
+    console.log(indianStateOrderTemp);
     const indianStateObjTemp = {};
     indianStateOrderTemp.forEach((stateId, index) => {
       if (indianStateObjTemp[stateId]) {

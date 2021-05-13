@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { getService } from "../../Services/ApiServices";
 import { observer } from "mobx-react-lite";
+import { IndianStateNames } from "../../Constant/constant";
 
 const IndiaInfection = observer(({ dataStore }) => {
   console.log(dataStore, "test");
@@ -52,7 +53,7 @@ const IndiaInfection = observer(({ dataStore }) => {
           {dataStore.indianStateOrder.map((row) => (
             <TableRow key={row}>
               <TableCell component="th" scope="row">
-                {row}
+                {`${IndianStateNames[row].name} (${row})`}
               </TableCell>
               <TableCell align="right">
                 {dataStore.indianStateObj[row].population}
