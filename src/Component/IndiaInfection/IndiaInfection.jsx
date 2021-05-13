@@ -33,7 +33,7 @@ const IndiaInfection = observer(({ dataStore }) => {
   }
 
   return (
-    <div>
+    <div style={{ marginBottom: "100px" }}>
       <h6>Data as on {dataStore.indianDataDated}</h6>
       <TableContainer component={Paper} style={{ maxHeight: "500px" }}>
         <Table stickyHeader aria-label="table">
