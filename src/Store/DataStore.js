@@ -4,6 +4,9 @@ class DataStore {
   masterDataObj = {};
   masterDataCountryOrder = [];
 
+  indianStateObj = {};
+  indianStateOrder = [];
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -45,6 +48,36 @@ class DataStore {
     this.masterDataObj = masterObj;
     this.masterDataCountryOrder = masterCountryOrder;
     console.log(this.masterDataCountryOrder, "test");
+  }
+
+  generateIndiaInfectionData(data) {
+    const indianStateOrderTemp = Object.keys(data);
+    const indianStateObjTemp = {};
+    indianStateOrderTemp.forEach((stateId, index) => {
+      if (indianStateObjTemp[stateId]) {
+        console.warn("repited data", stateId, index);
+        return true;
+      }
+      const stateObj = {
+        ...data[stateId].total,
+        population: data[stateId]?.meta.population
+      };
+      indianStateObjTemp[stateId] = stateObj;
+      indianStateObjTemp[stateId].deathPer = (
+        (stateObj.deceased / stateObj.population) *
+        100
+      ).toFixed(4);
+      indianStateObjTemp[stateId].recoverPer = (
+        (stateObj.recovered / stateObj.population) *
+        100
+      ).toFixed(4);
+      indianStateObjTemp[stateId].infectedPer = (
+        (stateObj.confirmed / stateObj.population) *
+        100
+      ).toFixed(4);
+    });
+    this.indianStateOrder = indianStateOrderTemp;
+    this.indianStateObj = indianStateObjTemp;
   }
 }
 

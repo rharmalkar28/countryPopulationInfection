@@ -12,31 +12,34 @@ import {
 import { getService } from "../../Services/ApiServices";
 import { observer } from "mobx-react-lite";
 
-const CountryInfected = observer(({ dataStore }) => {
+const IndiaInfection = observer(({ dataStore }) => {
+  console.log(dataStore, "test");
   const [isLoading, setIsLoader] = useState(true);
-
-  async function getCountryInfection() {
+  async function getIndiaInfection() {
     const responce = await Promise.all([
-      getService("https://restcountries.eu/rest/v2/all"),
-      getService("https://api.covid19api.com/summary")
+      getService("https://api.covid19india.org/v4/min/data.min.json")
     ]);
-    dataStore.generateRowData(responce[0].data, responce[1].data);
+    console.log("exe");
+    dataStore.generateIndiaInfectionData(responce[0].data);
     setIsLoader(false);
   }
   useEffect(() => {
-    getCountryInfection();
+    getIndiaInfection();
   }, []);
 
   if (isLoading) {
     return <LinearProgress />;
   }
+
   return (
     <TableContainer component={Paper} style={{ maxHeight: "500px" }}>
       <Table stickyHeader aria-label="table">
         <TableHead>
           <TableRow>
-            <TableCell>Country (Capital)</TableCell>
+            <TableCell>State/ UT</TableCell>
             <TableCell align="right">Populaion</TableCell>
+            <TableCell align="right">Tested</TableCell>
+            <TableCell align="right">vaccinated</TableCell>
             <TableCell align="right">Covid Confirmed</TableCell>
             <TableCell align="right">Covid Recovered</TableCell>
             <TableCell align="right">Covid Death</TableCell>
@@ -46,49 +49,37 @@ const CountryInfected = observer(({ dataStore }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {dataStore.masterDataCountryOrder.map((row) => (
+          {dataStore.indianStateOrder.map((row) => (
             <TableRow key={row}>
               <TableCell component="th" scope="row">
-                {`${dataStore.masterDataObj[row].Country} (${dataStore.masterDataObj[row].Capital})`}
+                {row}
               </TableCell>
               <TableCell align="right">
-                {dataStore.masterDataObj[row].population}
+                {dataStore.indianStateObj[row].population}
               </TableCell>
               <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalConfirmed || "-"}
+                {dataStore.indianStateObj[row].tested}
               </TableCell>
               <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalRecovered || "-"}
+                {dataStore.indianStateObj[row].vaccinated}
               </TableCell>
               <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalDeaths || "-"}
+                {dataStore.indianStateObj[row].confirmed || "-"}
               </TableCell>
               <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalConfirmed
-                  ? (
-                      (dataStore.masterDataObj[row].TotalConfirmed /
-                        dataStore.masterDataObj[row].population) *
-                      100
-                    ).toFixed(4) + " %"
-                  : "-"}
+                {dataStore.indianStateObj[row].recovered || "-"}
               </TableCell>
               <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalRecovered
-                  ? (
-                      (dataStore.masterDataObj[row].TotalRecovered /
-                        dataStore.masterDataObj[row].population) *
-                      100
-                    ).toFixed(4) + " %"
-                  : "-"}
+                {dataStore.indianStateObj[row].deceased || "-"}
               </TableCell>
               <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalDeaths
-                  ? (
-                      (dataStore.masterDataObj[row].TotalDeaths /
-                        dataStore.masterDataObj[row].population) *
-                      100
-                    ).toFixed(4) + " %"
-                  : "-"}
+                {dataStore.indianStateObj[row].infectedPer + " %"}
+              </TableCell>
+              <TableCell align="right">
+                {dataStore.indianStateObj[row].recoverPer + " %"}
+              </TableCell>
+              <TableCell align="right">
+                {dataStore.indianStateObj[row].deathPer + " %"}
               </TableCell>
             </TableRow>
           ))}
@@ -98,4 +89,4 @@ const CountryInfected = observer(({ dataStore }) => {
   );
 });
 
-export default CountryInfected;
+export default IndiaInfection;
