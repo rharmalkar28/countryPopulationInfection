@@ -31,70 +31,73 @@ const CountryInfected = observer(({ dataStore }) => {
     return <LinearProgress />;
   }
   return (
-    <TableContainer component={Paper} style={{ maxHeight: "500px" }}>
-      <Table stickyHeader aria-label="table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Country (Capital)</TableCell>
-            <TableCell align="right">Populaion</TableCell>
-            <TableCell align="right">Covid Confirmed</TableCell>
-            <TableCell align="right">Covid Recovered</TableCell>
-            <TableCell align="right">Covid Death</TableCell>
-            <TableCell align="right">% of population infected</TableCell>
-            <TableCell align="right">% of population recoverd</TableCell>
-            <TableCell align="right">% of population death</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {dataStore.masterDataCountryOrder.map((row) => (
-            <TableRow key={row}>
-              <TableCell component="th" scope="row">
-                {`${dataStore.masterDataObj[row].Country} (${dataStore.masterDataObj[row].Capital})`}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.masterDataObj[row].population}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalConfirmed || "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalRecovered || "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalDeaths || "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalConfirmed
-                  ? (
-                      (dataStore.masterDataObj[row].TotalConfirmed /
-                        dataStore.masterDataObj[row].population) *
-                      100
-                    ).toFixed(4) + " %"
-                  : "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalRecovered
-                  ? (
-                      (dataStore.masterDataObj[row].TotalRecovered /
-                        dataStore.masterDataObj[row].population) *
-                      100
-                    ).toFixed(4) + " %"
-                  : "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.masterDataObj[row].TotalDeaths
-                  ? (
-                      (dataStore.masterDataObj[row].TotalDeaths /
-                        dataStore.masterDataObj[row].population) *
-                      100
-                    ).toFixed(4) + " %"
-                  : "-"}
-              </TableCell>
+    <div>
+      <h6>Data as on {dataStore.globalDataDated}</h6>
+      <TableContainer component={Paper} style={{ maxHeight: "500px" }}>
+        <Table stickyHeader aria-label="table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Country (Capital)</TableCell>
+              <TableCell align="right">Populaion</TableCell>
+              <TableCell align="right">Covid Confirmed</TableCell>
+              <TableCell align="right">Covid Recovered</TableCell>
+              <TableCell align="right">Covid Death</TableCell>
+              <TableCell align="right">% of population infected</TableCell>
+              <TableCell align="right">% of population recoverd</TableCell>
+              <TableCell align="right">% of population death</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {dataStore.masterDataCountryOrder.map((row) => (
+              <TableRow key={row}>
+                <TableCell component="th" scope="row">
+                  {`${dataStore.masterDataObj[row].Country} (${dataStore.masterDataObj[row].Capital})`}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.masterDataObj[row].population}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.masterDataObj[row].TotalConfirmed || "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.masterDataObj[row].TotalRecovered || "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.masterDataObj[row].TotalDeaths || "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.masterDataObj[row].TotalConfirmed
+                    ? (
+                        (dataStore.masterDataObj[row].TotalConfirmed /
+                          dataStore.masterDataObj[row].population) *
+                        100
+                      ).toFixed(4) + " %"
+                    : "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.masterDataObj[row].TotalRecovered
+                    ? (
+                        (dataStore.masterDataObj[row].TotalRecovered /
+                          dataStore.masterDataObj[row].population) *
+                        100
+                      ).toFixed(4) + " %"
+                    : "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.masterDataObj[row].TotalDeaths
+                    ? (
+                        (dataStore.masterDataObj[row].TotalDeaths /
+                          dataStore.masterDataObj[row].population) *
+                        100
+                      ).toFixed(4) + " %"
+                    : "-"}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 });
 

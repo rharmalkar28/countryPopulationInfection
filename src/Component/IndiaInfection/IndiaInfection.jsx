@@ -33,60 +33,63 @@ const IndiaInfection = observer(({ dataStore }) => {
   }
 
   return (
-    <TableContainer component={Paper} style={{ maxHeight: "500px" }}>
-      <Table stickyHeader aria-label="table">
-        <TableHead>
-          <TableRow>
-            <TableCell>State/ UT</TableCell>
-            <TableCell align="right">Populaion</TableCell>
-            <TableCell align="right">Tested</TableCell>
-            <TableCell align="right">vaccinated</TableCell>
-            <TableCell align="right">Covid Confirmed</TableCell>
-            <TableCell align="right">Covid Recovered</TableCell>
-            <TableCell align="right">Covid Death</TableCell>
-            <TableCell align="right">% of population infected</TableCell>
-            <TableCell align="right">% of population recoverd</TableCell>
-            <TableCell align="right">% of population death</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {dataStore.indianStateOrder.map((row) => (
-            <TableRow key={row}>
-              <TableCell component="th" scope="row">
-                {`${IndianStateNames[row].name} (${row})`}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].population}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].tested}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].vaccinated}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].confirmed || "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].recovered || "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].deceased || "-"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].infectedPer + " %"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].recoverPer + " %"}
-              </TableCell>
-              <TableCell align="right">
-                {dataStore.indianStateObj[row].deathPer + " %"}
-              </TableCell>
+    <div>
+      <h6>Data as on {dataStore.indianDataDated}</h6>
+      <TableContainer component={Paper} style={{ maxHeight: "500px" }}>
+        <Table stickyHeader aria-label="table">
+          <TableHead>
+            <TableRow>
+              <TableCell>State/ UT</TableCell>
+              <TableCell align="right">Populaion</TableCell>
+              <TableCell align="right">Tested</TableCell>
+              <TableCell align="right">vaccinated</TableCell>
+              <TableCell align="right">Covid Confirmed</TableCell>
+              <TableCell align="right">Covid Recovered</TableCell>
+              <TableCell align="right">Covid Death</TableCell>
+              <TableCell align="right">% of population infected</TableCell>
+              <TableCell align="right">% of population recoverd</TableCell>
+              <TableCell align="right">% of population death</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {dataStore.indianStateOrder.map((row) => (
+              <TableRow key={row}>
+                <TableCell component="th" scope="row">
+                  {`${IndianStateNames[row].name} (${row})`}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].population}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].tested}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].vaccinated}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].confirmed || "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].recovered || "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].deceased || "-"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].infectedPer + " %"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].recoverPer + " %"}
+                </TableCell>
+                <TableCell align="right">
+                  {dataStore.indianStateObj[row].deathPer + " %"}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 });
 

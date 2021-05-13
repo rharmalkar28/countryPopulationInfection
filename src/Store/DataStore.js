@@ -6,7 +6,8 @@ class DataStore {
 
   indianStateObj = {};
   indianStateOrder = [];
-
+  globalDataDated = "";
+  indianDataDated = "";
   constructor() {
     makeAutoObservable(this);
   }
@@ -47,6 +48,8 @@ class DataStore {
 
     this.masterDataObj = masterObj;
     this.masterDataCountryOrder = masterCountryOrder;
+    console.log(covidData, "Date");
+    this.globalDataDated = new Date(`${covidData.Date}`).toLocaleString();
     console.log(this.masterDataCountryOrder, "test");
   }
 
@@ -54,7 +57,6 @@ class DataStore {
     const indianStateOrderTemp = Object.keys(data).filter(
       (key) => key !== "TT"
     );
-    console.log(indianStateOrderTemp);
     const indianStateObjTemp = {};
     indianStateOrderTemp.forEach((stateId, index) => {
       if (indianStateObjTemp[stateId]) {
@@ -81,6 +83,9 @@ class DataStore {
     });
     this.indianStateOrder = indianStateOrderTemp;
     this.indianStateObj = indianStateObjTemp;
+    this.indianDataDated = new Date(
+      data[indianStateOrderTemp[0]].meta.last_updated
+    ).toLocaleDateString();
   }
 }
 
